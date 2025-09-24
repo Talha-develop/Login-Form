@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
-
+import { showSuccess, showError } from "../utils/toast";
 import InputField from "./InputField";
 import PasswordField from "./PasswordField";
 import Button from "./Button";
@@ -19,14 +19,27 @@ const LoginForm: React.FC = () => {
     mode: "onBlur",
   });
 
-  const onSubmit = (data: LoginFormValues) => {
-    console.log("Form Submitted ✅:", data);
+  const onSubmit = async (data: LoginFormValues) => {
+    try {
+      console.log("Form Submitted ✅:", data);
+
+      // simulate API delay
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      if (data.email === "test@test.com" && data.password === "123456") {
+        showSuccess("Login successful 🎉");
+      } else {
+        showError("Invalid credentials ❌");
+      }
+    } catch {
+      showError("Something went wrong 😞");
+    }
   };
 
   return (
     <motion.form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-sm mx-auto p-8 border rounded-2xl shadow-lg bg-white"
+      className="min-w-lg mx-auto p-8 border rounded-4xl shadow-lg bg-white"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4 }}
