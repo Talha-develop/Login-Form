@@ -39,7 +39,6 @@ const LoginForm: React.FC = () => {
   return (
     <motion.form
       onSubmit={handleSubmit(onSubmit)}
-      // className="max-w-72 lg:min-w-lg mx-auto p-8 border rounded-4xl shadow-lg bg-white"
       className="w-[90%] max-w-sm md:max-w-md lg:max-w-lg mx-auto p-8 border rounded-4xl shadow-lg bg-white"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
